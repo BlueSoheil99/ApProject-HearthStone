@@ -1,63 +1,59 @@
 package project01.Players;
 
-import project01.CartsAndHeros.Carts;
+import com.google.gson.Gson;
+import project01.CartsAndHeros.Cart;
+import project01.CartsAndHeros.Hero;
+import project01.Log.Logger;
 
 //dont forget to make log and hashed pass+ gson + management
 
 public class Player {
-    public static Player[] allPlayers;
-    private static Player currentPlayer = null;
+    private static Gson g = new Gson();
+    private static Logger logFile;
+    private static int totalSignUps = 0;
+
     private String   userName;
-    private Password   password;
-    private int      numberOfManas =50;
-    private Carts[]  TotalCarts;
+    private String   password; //or make a inner class named password
+    private int userId;
+    private int  numberOfCoins =50;
+    private Cart[]  totalCarts;
+    private Hero[]  heroes;
 
-    private class Password{     // if
-        Password(String newPass){
-            //make a hashed pass.
-        }
 
-    }
-
-    private Player(String newUser , String newPass ){
+    public Player(String newUser , String newPass ){
+        totalSignUps += 1;
+        userId = totalSignUps;
         this.userName = newUser;
-        this.password = new Password(newPass); //or HashMaker(newPass)
+        this.password = newPass ;// try to make password as a hashcode( by an inner class or a method)
+        //set carts
+        //set heroes
+        //create profile
+        //create log
+//        Logger logFile = new Logger( this.userName , this.password.toString());
 
     }
 
-//    private void Hash HashMaker(String str){
-//
-//    }
-    public static void signUp(String enteredUserName , String enteredPassword){
-        //check if enteredUserName hasn't been used then initialize a new player
+
+//setter
+
+    public void setNumberOfCoins(int numberOfCoins) {
+        this.numberOfCoins = numberOfCoins;
     }
 
-    public static Player getCurrentPlayer(){
-        return currentPlayer;
+    public void setHeroes(Hero[] heroes) {
+        this.heroes = heroes;
     }
 
-    public static void login(Player player){
-        currentPlayer = player;
-
-    } //must get username and password and then set currentPlayer
-
-    public static void exit(){
-        if (currentPlayer != null ){
-            currentPlayer = null;
-        }else{
-            System.out.println("");
-        }
+    public void setTotalCarts(Cart[] totalCarts) {
+        this.totalCarts = totalCarts;
     }
 
-    public static void exitAll(){}
-
-    public static void deletePlayer(){
-        System.out.print( "password: ");
-        if (){
-
-            exit();
-        }               //if password is correct we delete its file
+//getter
+    String getUserName(){
+        return userName;
     }
-
+    String getPassword(){
+        return password;
+    }
 
 }
