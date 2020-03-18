@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static project01.Players.PlayerManagement.logger;
+
 public class CLI_Runner {
 
     static Scanner scanner = new Scanner(System.in);
@@ -30,8 +32,10 @@ public class CLI_Runner {
                     }
 
                 } catch (Exception e) {
-                    e.getMessage();
-                    System.out.println("errrrrrrror");
+                    e.printStackTrace();
+                    logger.warning("ridi!");
+//                    log()
+
                 }
             }
 
@@ -68,9 +72,9 @@ public class CLI_Runner {
                 String password = scanner.nextLine();
                 try {
                     PlayerManagement.deletePlayer(password);
-                    System.out.println("Your account  has been deleted successfully.\nPress enter to exit the game...");
                     menuHolder=0;   //stop running the mainMenu
                     runHolder = 0;  //to exit the whole game
+                    System.out.println("Your account has been deleted successfully.\nPress enter to exit the game...");
                     scanner.nextLine();
                 }catch (IOException e){
                     System.err.println(e.getMessage());
@@ -79,8 +83,7 @@ public class CLI_Runner {
 
             case "exit":
                 menuHolder = 0;
-                PlayerManagement.getCurrentPlayer().saveData();
-                /////////close log if necessary
+                PlayerManagement.dumpCurrentPlayer();
                 break;
 
             case "exit-a":
@@ -90,19 +93,14 @@ public class CLI_Runner {
                     System.out.println("Are you sure? (y/n)");
                     String ans = scanner.nextLine();
                     if (ans.equals("y")) {
-
                         menuHolder = 0;
                         runHolder = 0;
-                        PlayerManagement.getCurrentPlayer().saveData();
-                        ////////////close log
+                        PlayerManagement.dumpCurrentPlayer();
                         rightInput = true;
-
+                        //System.exit(0);
                     } else if (ans.equals("n")) {
-
                         rightInput = true;
-
                     } else {
-
                         System.err.println("Invalid input.");
                     }
                 }
@@ -112,9 +110,6 @@ public class CLI_Runner {
                 System.err.println("...invalid input...");
                 break;
         }
-
-
-
     }
 
     static void gameStarter(){
@@ -168,7 +163,6 @@ public class CLI_Runner {
 //        writer.close();                                                    //
 ///////////////////////////method 3 for saving data on file////////////////////
             player.saveData();                                               //
-            player.createLog();
             System.out.println("CONGRATS! YOUR ACCOUNT HAS BEEN MADE.\n press enter to continue...");
             scanner.nextLine();
         }
@@ -192,6 +186,13 @@ public class CLI_Runner {
                     state = true;
                     PlayerManagement.setCurrentPlayer( PlayerManagement.getPlayer(username) );
                     System.out.println("\n** welcome "+ PlayerManagement.getCurrentPlayer().getUserName().toUpperCase() + " **");
+//                    FileHandler fh = new FileHandler(PlayerManagement.getCurrentPlayer().getLogPath(),true);
+//                    fh.setFormatter(new SimpleFormatter());
+//                    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+//                    logger.addHandler(fh);
+////                    logger.setLevel();
+//                    logger.info("signed up " );
+//                    fh.close();
                 }else {
                     System.err.println("username or password is incorrect , try again or enter "
                             + "'back' to return to starter menu."); //this error is for when password is incorrect we could've th

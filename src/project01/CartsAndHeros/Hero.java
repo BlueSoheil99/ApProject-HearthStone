@@ -1,7 +1,11 @@
 package project01.CartsAndHeros;
 
+import java.util.ArrayList;
+
 public abstract class Hero {
-     int HP = 30 ;
+      public static ArrayList<Hero> Heroes = new ArrayList<>();
+//      ArrayList<Cart>
+      int HP = 30 ;
 //    private HeroPower[] heroPowers={one , two , three}
 //    private HeroPower heroPower = null;
     private Hero(Cart[] heroCards){}

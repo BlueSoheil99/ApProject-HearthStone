@@ -4,18 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import project01.CartsAndHeros.Cart;
 import project01.CartsAndHeros.Hero;
-import project01.Log.Logger;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-//dont forget to make log and hashed pass+ gson + management
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Player {
-    private static Gson g = new GsonBuilder().setPrettyPrinting().create();
-    private static Logger logFile;
-    private static int totalSignUps = 0;
+//    private static Logger logFile;
 
     private String   userName;
     private String   password; //or make a inner class named password
@@ -28,18 +23,16 @@ public class Player {
 
 
     public Player(String newUser , String newPass ) {
-        totalSignUps += 1;
-        userId = totalSignUps;
+        userId = new File("src\\Data\\Logs").list().length + 1 ;
         this.userName = newUser;
         this.password = newPass ;// try to make password as a hashcode( by an inner class or a method)
         profilePath = "src/Data/Profiles/"+ this.getUserName()+".json";
-        logPath     = "src/Data/Logs/"+ this.getUserName()+"_"+this.getUserId()+".log";
+        logPath     = "src/Data/Logs/"+ this.getUserName()+"-"+this.getUserId()+".log";
         //set carts
         //set heroes
 
                 //create log
-//        Logger logFile = new Logger( this.userName , this.password.toString());
-
+        this.logInit();
     }
 
 
@@ -76,6 +69,57 @@ public class Player {
     }
 
 
+    private void logInit(){
+        try {
+            FileWriter writer = new FileWriter(this.getLogPath());
+            PrintWriter printer =new PrintWriter(writer);
+            printer.println("USER: "+this.getUserName());
+            printer.println("CREATED_AT: " + LocalDateTime.now().format( DateTimeFormatter.ofPattern(" yyyy/MM/dd  HH:mm:ss") ));
+            printer.println("PASSWORD: "+this.getPassword());
+            printer.println(" ");
+
+            printer.close();
+            //or writer.close() ??????
+        }catch (Exception e ) {
+            System.err.println(e.getMessage());
+        }
+    }
+    void logFinalize(){  // in this method we used the link in README + the way we made logInit method
+        try {
+            // input the file content to the StringBuffer "input"
+            BufferedReader file = new BufferedReader(new FileReader(logPath));
+            StringBuffer inputBuffer = new StringBuffer();
+            String line ;
+
+            while ( (line= file.readLine()) != null) {
+                if(line.equals(" ")) {
+                    inputBuffer.append("DELETED_AT: " +
+                                       LocalDateTime.now().format( DateTimeFormatter.ofPattern(" yyyy/MM/dd  HH:mm:ss"))+"\n \r\n" );
+                                        // \r\n to make a distance between header and body
+                }else{
+                    inputBuffer.append(line);
+                    inputBuffer.append('\n');
+                }
+            }
+            file.close();
+            // i tried using FileInputStreamer but it didn't work well so i did the same as i did in logInit method
+            String inputStr = inputBuffer.toString();
+            FileWriter writer = new FileWriter(this.getLogPath());
+            PrintWriter printer =new PrintWriter(writer);
+            for (String x:inputStr.split("\n")) {
+                printer.println(x);
+            }
+            printer.close();
+
+        }catch (Exception e){
+          System.err.println(e.getMessage());
+        }
+
+    }
+
+    /**
+     * rewrites the player's information on its profile
+     */
     public void saveData(){
         try{
             FileWriter writer = new FileWriter(this.getProfilePath());
@@ -83,26 +127,10 @@ public class Player {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String json = gson.toJson(this);
             printer.println( json );
-            printer.close();
+            printer.close(); //or flush() ?
         }catch (IOException e ){
             System.out.println(e.getMessage());
         }
     }
 
-    public void createLog(){
-
-    }
-
-
-    //    public static void main(String[] args) {
-//        Player player = new Player("newone" , "123456");
-//        String json = g.toJson(player);
-//        System.out.println(json);
-//        System.out.println(g.fromJson(json , Player.class));
-//
-////        JsonWriter writer = new JsonWriter( new FileWriter("n,m"));
-//        JsonReader reader = new JsonReader(new StringReader("myFile"+".txt"));
-//
-//
-//    }
 }

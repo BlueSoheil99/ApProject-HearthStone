@@ -1,14 +1,14 @@
 package project01.CartsAndHeros;
 
 enum Rarity  {Common , Rare, Epic , Legendary}
-enum CartClasses { Mage , Rogue , Warlock , Natural}
+enum HeroClass { Mage , Rogue , Warlock , Natural}
 
 public abstract class Cart {
 //properties
     protected int mana;
     protected String name;
-    protected Rarity cartRarity;
-    protected CartClasses cartClass;
+    protected Rarity rarity;
+    protected HeroClass heroClass;
     protected String description;
 //setter
     protected void setName(String name) {
@@ -17,11 +17,11 @@ public abstract class Cart {
     protected void setMana(int mana) {
         this.mana = mana;
     }
-    protected void setCartRarity(Rarity cartRarity) {
-        this.cartRarity = cartRarity;
+    protected void setRarity(Rarity rarity) {
+        this.rarity = rarity;
     }
-    protected void setCartClass(CartClasses cartClass) {
-        this.cartClass = cartClass;
+    protected void setHeroClass(HeroClass heroClass) {
+        this.heroClass = heroClass;
     }
     protected void setDescription(String description) {
         this.description = description;
@@ -33,95 +33,33 @@ public abstract class Cart {
     public String getName() {
         return name;
     }
-    public CartClasses getCartClass() {
-        return cartClass;
+    public HeroClass getHeroClass() {
+        return heroClass;
     }
-    public Rarity getCartRarity() {
-        return cartRarity;
+    public Rarity getRarity() {
+        return rarity;
     }
     public String getDescription() {
         return description;
     }
+
+    Cart(String name , int mana , HeroClass heroClass, Rarity rarity){
+        setName(name);
+        setMana(mana);
+        setRarity(rarity);
+        setHeroClass(heroClass);
+
+
+    }
 //methods
     public abstract void attack(Cart underAttackCart);
     public abstract void attack(Hero underAttackHero);
-
 }
 
-
-
-
-class Spell extends Cart {
-
-    private Spell(int mana , Rarity cartRarity , CartClasses cartClass){
-        setMana(mana);
-        setCartClass(cartClass);
-        setCartRarity(cartRarity);
-    }
-    private Spell(int mana , Rarity cartRarity , CartClasses cartClass , String description){
-        this( mana,cartRarity,cartClass);
-        setDescription(description);
-    }
-
-
-
-    @Override
-    public void attack(Cart underAttackCart) {
-
-    }
-
-    @Override
-    public void attack(Hero underAttackHero) {
-
-    }
+interface attackable{
+    void attack();
 }
 
-class Minion extends Cart {
-    private int HP;
+interface dsflksdf{
 
-    public int getHP() {
-        return HP;
-    }
-
-    public void setHP(int HP) {
-        this.HP = HP;
-    }
-
-
-    @Override
-    public void attack(Cart underAttackCart) {
-
-    }
-
-    @Override
-    public void attack(Hero underAttackHero) {
-
-    }
-}
-
-class Weapon extends Cart {
-
-
-    @Override
-    public void attack(Cart underAttackCart) {
-
-    }
-
-    @Override
-    public void attack(Hero underAttackHero) {
-
-    }
-}
-
-class Mission extends Cart {
-
-    @Override
-    public void attack(Cart underAttackCart) {
-
-    }
-
-    @Override
-    public void attack(Hero underAttackHero) {
-
-    }
 }

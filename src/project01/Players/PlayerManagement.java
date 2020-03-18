@@ -8,21 +8,39 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public abstract class PlayerManagement {
     private static Player currentPlayer = null;
 
+    private static FileHandler fh;
+    public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+    //////getter and setter
     public static void setCurrentPlayer(Player player){
         currentPlayer = player;
-        //open this player's logfile if it's necessary
-    }
 
-//getter
+        try {
+            fh = new FileHandler(player.getLogPath() , true);
+            fh.setFormatter(new SimpleFormatter());
+            logger.setUseParentHandlers(false);
+            logger.addHandler(fh);
+            logger.info("signed in");
+
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     public static Player getCurrentPlayer(){
         return currentPlayer;
     }
 
-
+/////////
    public static boolean allPlayersContain(String username , String password) {
        boolean ans = false;
 
@@ -63,22 +81,35 @@ public abstract class PlayerManagement {
        return player;
    }
 
+   public static void log(String level , String message){
+        logger.log(Level.parse(level) , message);
+//       Level.
+    }
 
    public static void deletePlayer(String enteredPassword) throws IOException{
         if (currentPlayer.getPassword().equals(enteredPassword)){
-                File file= new File(currentPlayer.getProfilePath());
+            logger.warning("player deleted");
+            fh.close();
 
-                if ( ! file.delete()){
-                    throw new IOException("Deleting failed");
-                }
-
-
-            //add a DELETE log
-
+            File file= new File(currentPlayer.getProfilePath());
+            if ( ! file.delete()){
+                throw new IOException("Deleting failed");
+            }else {     //when deleting is done successfully
+                currentPlayer.logFinalize();
+            }
         }
         else{
             throw new IOException("Wrong password");
         }
+   }
+
+   public static void dumpCurrentPlayer(){
+       Level level=Level.parse("sdf");
+       logger.log(level , "sign outiindnfjkdad");
+       ///make a signout log
+        fh.close();
+        currentPlayer.saveData();
+        currentPlayer=null;
    }
 
 }
