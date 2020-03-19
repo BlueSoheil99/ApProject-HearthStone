@@ -3,39 +3,24 @@ package project01.Players;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
+import  project01.Log.Logger;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
+
 
 public abstract class PlayerManagement {
     private static Player currentPlayer = null;
 
-    private static FileHandler fh;
-    public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     //////getter and setter
     public static void setCurrentPlayer(Player player){
         currentPlayer = player;
-
-        try {
-            fh = new FileHandler(player.getLogPath() , true);
-            fh.setFormatter(new SimpleFormatter());
-            logger.setUseParentHandlers(false);
-            logger.addHandler(fh);
-            logger.info("signed in");
-
-
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        Logger.initLogger(player);
+        Logger.log("player" , currentPlayer.getUserName()+" signed in");
     }
+
     public static Player getCurrentPlayer(){
         return currentPlayer;
     }
@@ -60,7 +45,7 @@ public abstract class PlayerManagement {
                ans = true;
            }
            // if passwords don't match, we handle the exception with no message and we print an error in CLIRunner instead
-           // , because this method is designed to give us true or false and exception is not expected from allPlayersContain
+           // , because this method is designed to give us true or false and "exception" is not expected from allPlayersContain
 
        }catch(FileNotFoundException e){       } //we display a message instead in CLI_Runner
        catch (IOException e) {
@@ -81,15 +66,10 @@ public abstract class PlayerManagement {
        return player;
    }
 
-   public static void log(String level , String message){
-        logger.log(Level.parse(level) , message);
-//       Level.
-    }
-
    public static void deletePlayer(String enteredPassword) throws IOException{
         if (currentPlayer.getPassword().equals(enteredPassword)){
-            logger.warning("player deleted");
-            fh.close();
+            Logger.log("player" , currentPlayer.getUserName()+" got deleted");
+            Logger.closeLogfile();
 
             File file= new File(currentPlayer.getProfilePath());
             if ( ! file.delete()){
@@ -104,10 +84,8 @@ public abstract class PlayerManagement {
    }
 
    public static void dumpCurrentPlayer(){
-       Level level=Level.parse("sdf");
-       logger.log(level , "sign outiindnfjkdad");
-       ///make a signout log
-        fh.close();
+        Logger.log("player" , currentPlayer.getUserName());
+        Logger.closeLogfile();
         currentPlayer.saveData();
         currentPlayer=null;
    }
