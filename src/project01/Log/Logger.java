@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  *
  */
 public class Logger {
-    public static Logger logger;
+    private static Logger logger;
     FileWriter writer;
     PrintWriter printer;
     private Logger(String logPath){

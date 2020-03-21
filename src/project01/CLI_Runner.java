@@ -14,12 +14,10 @@ import java.util.Scanner;
 
 public class CLI_Runner {
 
-    static Scanner scanner = new Scanner(System.in);
-    public static int menuHolder = 1;       //
-    public static int runHolder = 1;
-    public static boolean collectionHolder = true;
-    public static boolean storeHolder = true;
-    public static boolean gameStarterState = false;
+    private static Scanner scanner = new Scanner(System.in);
+    private static int menuHolder = 1;
+    private static int runHolder = 1;
+    private static boolean gameStarterState = false;
 
     public static void main(String[] args) {
         CardManagement.initGameTotalCards(); //initializing all cards of the game at the beginning
@@ -90,7 +88,7 @@ public class CLI_Runner {
 //        gson.toJson(player,writer);                                        //
 //        writer.close();                                                    //
 ///////////////////////////method 3 for saving data on file////////////////////
-            player.saveData();                                               //
+            player.saveDataForTheFirstTime();                                               //
             System.out.println("CONGRATS! YOUR ACCOUNT HAS BEEN MADE.");
             continueByEnter();
         }
@@ -204,7 +202,7 @@ public class CLI_Runner {
     }
 
     private static void collection(){
-        collectionHolder = true;
+        boolean collectionHolder = true;
         while (collectionHolder) {
             System.out.println("\nCOLLECTION MENU :\n" +
                     "PLEASE ENTER ONE OF THE OPTIONS BELOW:\n"+
@@ -401,7 +399,7 @@ public class CLI_Runner {
     }
 
     private static void store(){
-        storeHolder= true;
+        boolean storeHolder= true;
         while (storeHolder) {
             System.out.println("\nSTORE MENU :\n" +
                     "PLEASE ENTER ONE OF THE OPTIONS BELOW:\n"+
@@ -459,7 +457,7 @@ public class CLI_Runner {
                             Logger.log("STORE","buyCard: "+choice.substring(4));
                             System.out.println("...card is purchased successfully...");
                             continueByEnter();
-                        }catch (IOException e){
+                        }catch (Exception e){
                             System.err.println(e.getMessage());
                             Logger.logError("STORE",e);
                             continueByEnter();

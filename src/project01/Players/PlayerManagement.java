@@ -11,15 +11,31 @@ import java.io.IOException;
 
 
 public abstract class PlayerManagement {
-    private static Player currentPlayer = null;
+    static Player currentPlayer = null;
 
 
     //////getter and setter
     public static void setCurrentPlayer(Player player){
         currentPlayer = player;
+        CardManagement.loadPlayerTotalCards();
+        CardManagement.loadPlayerHeroesAllDeckCards();
+        try {
+            CardManagement.setCurrentHero(player.getCurrentHero());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        try {
+            CardManagement.setCurrentHero(player.getCurrentHero());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         Logger.initLogger(player);
         Logger.log("player" , currentPlayer.getUserName()+" signed in");
     }
+
 
     public static Player getCurrentPlayer(){
         return currentPlayer;
@@ -84,7 +100,7 @@ public abstract class PlayerManagement {
    }
 
    public static void dumpCurrentPlayer(){
-        Logger.log("player" , currentPlayer.getUserName());
+        Logger.log("player" , currentPlayer.getUserName()+" signed out");
         Logger.closeLogfile();
         currentPlayer.saveData();
         currentPlayer=null;
