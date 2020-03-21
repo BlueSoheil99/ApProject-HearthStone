@@ -14,7 +14,7 @@ import java.util.HashMap;
 public abstract class CardManagement {
 
     private static Hero currentHero;
-    private static ArrayList<Card> playerTotalCards;
+    private static ArrayList<Card> playerTotalCards ;//= new ArrayList<>();
     private static HashMap<String , ArrayList<Card> > heroesAllDeckCards; //the keys are heroe and values are their deck
     private static HashMap<String , Card > gameTotalCards; //the keys are card names with upperCase letters and values are cards
 
@@ -23,7 +23,8 @@ public abstract class CardManagement {
         return currentHero;
     }
     public static ArrayList<Card> getPlayerTotalCards() {
-        return playerTotalCards;
+        playerTotalCards.remove(null);
+        return CardManagement.playerTotalCards;
     }
     public static HashMap<String, ArrayList<Card>> getHeroesAllDeckCards() {
         return heroesAllDeckCards;
@@ -78,11 +79,12 @@ public abstract class CardManagement {
 
     public static void loadPlayerTotalCards() {
         Card card;
-        playerTotalCards=new ArrayList<Card>();
+        ArrayList<Card> list =new ArrayList<Card>();
         for(String cardName : PlayerManagement.getCurrentPlayer().getPlayerTotalCards()){
             card = gameTotalCards.get(cardName.toUpperCase());
-            playerTotalCards.add(card);
+            list.add(card);
         }
+        playerTotalCards = list;
     }
 
     public static void loadPlayerHeroesAllDeckCards() {
@@ -173,4 +175,7 @@ public abstract class CardManagement {
     }
 
 
+//    public static void setPlayerTotalCards(ArrayList<Card> playerTotalCards) {
+//        CardManagement.playerTotalCards = playerTotalCards;
+//    }
 }

@@ -25,9 +25,13 @@ public class Player {
     private HashMap<String , ArrayList<String>> heroesAllDeckCards;
 
 
-    private static String[] defaultTotalCards = {"Gorehowl" , "SuperCollider"  , "Friendly Smith" , "Polymorph" , "Concrete Shield" ,
-            "Humility" , "Innervate" , "Omega Medic" , "Waterboy" , "Voodoo doctor" , "Slam" , "Mole","Arcane explosion","Dreadscale",
-            "Shadow Madness", "zilliax", "Abomination" , "Murloc Tidehunter", "Consecration","Stormhammer"    };
+//    private static String[] defaultTotalCards = {"Gorehowl" , "SuperCollider"  , "Friendly Smith" , "Polymorph" , "Concrete Shield" ,
+//            "Humility" , "Innervate" , "Omega Medic" , "Waterboy" , "Voodoo doctor" , "Slam" , "Mole","Arcane explosion","Dreadscale",
+//            "Shadow Madness", "zilliax", "Abomination" , "Murloc Tidehunter", "Consecration","Stormhammer"    };
+
+    private static String[] defaultPlayerTotalCards = { "SuperCollider"  , "Friendly Smith" , "Polymorph" ,
+        "Humility" , "Innervate" , "Omega Medic" , "Waterboy" , "Voodoo doctor" , "Slam" ,"Dreadscale"
+        , "Abomination" , "Murloc Tidehunter"  };
     private static HashMap<String , ArrayList<String>>  defaultDeckCards = new HashMap<String , ArrayList<String>>() ;
     {
         ArrayList<String> list = new ArrayList<>();
@@ -50,7 +54,7 @@ public class Player {
         this.password = newPass ;  // try to make password as a hashcode( by an inner class or a method)
         currentHero = "Mage";
 
-        playerTotalCards.addAll(Arrays.asList(defaultTotalCards));
+        playerTotalCards.addAll(Arrays.asList(defaultPlayerTotalCards));
         heroesAllDeckCards = defaultDeckCards;
         profilePath = "src/Data/Profiles/"+ this.getUserName()+".json";
         logPath     = "src/Data/Logs/"+ this.getUserName()+"-"+this.getUserId()+".log";

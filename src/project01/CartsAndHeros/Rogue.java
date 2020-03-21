@@ -25,6 +25,8 @@ public class Rogue extends Hero {
     }
     @Override
     public void loadAllNeutralCards() {
+        allNeutralCards=new ArrayList<>();
+
         for(Card card : CardManagement.getPlayerTotalCards()){
             if (card.getHeroClassName().equals("Neutral")){
                 allNeutralCards.add(card);
@@ -34,6 +36,7 @@ public class Rogue extends Hero {
     /////////these work with player deck cards
     @Override
     public void loadDeckHeroCarts() {
+        deckHeroCarts=new ArrayList<>();
         for(Card card : CardManagement.getHeroesAllDeckCards().get("Rogue")){  //we have a loop in all cards in mage's deck
             if (card.getHeroClassName().equals("Rogue")){
                 deckHeroCarts.add(card);
@@ -42,6 +45,7 @@ public class Rogue extends Hero {
     }
     @Override
     public void loadDeckNeutralCards() {
+        deckNeutralCards = new ArrayList<>();
         for(Card card : CardManagement.getHeroesAllDeckCards().get("Rogue")){ //we have a loop in all cards in mage's deck
             if (card.getHeroClassName().equals("Neutral")){
                 deckNeutralCards.add(card);
