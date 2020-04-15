@@ -1,31 +1,32 @@
-package project01.CartsAndHeros;
+package edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.heroes;
 
-import project01.Players.CardManagement;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.cards.Card;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.Players.CardManagement;
 
 import java.util.ArrayList;
 
-public class Warlock extends Hero{
+public class Mage extends Hero {
 
-    private static Warlock warlock;
-    public static Warlock getInstance(){
-        warlock = new Warlock();
-        warlock.setHP(35);
-        return warlock;
+    private static Mage mage;
+    public static Hero getInstance() {
+         mage = new Mage();
+         mage.setHP(30);
+        return mage;
     }
 
-    /////////////these work with player total cards....we use methods below to eventually load cards of this hero's deck out of player's file
+/////////////these work with player total cards....we use methods below to eventually load cards of this hero's deck out of player's file
     @Override
     public void loadAllHeroCards() {
-        allHeroCards=new ArrayList<>();
-        for(Card card : CardManagement.getPlayerTotalCards()){
-            if (card.getHeroClassName().equals("Warlock")){
-                allHeroCards.add(card);
-            }
-        }
+         allHeroCards=new ArrayList<>();
+         for(Card card : CardManagement.getPlayerTotalCards()){
+             if (card.getHeroClassName().equals("Mage")){
+                 allHeroCards.add(card);
+             }
+         }
     }
     @Override
     public void loadAllNeutralCards() {
-        allNeutralCards = new ArrayList<>();
+        allNeutralCards=new ArrayList<>();
         for(Card card : CardManagement.getPlayerTotalCards()){
             if (card.getHeroClassName().equals("Neutral")){
                 allNeutralCards.add(card);
@@ -35,17 +36,17 @@ public class Warlock extends Hero{
     /////////these work with player deck cards
     @Override
     public void loadDeckHeroCarts() {
-        deckHeroCarts = new ArrayList<>();
-        for(Card card : CardManagement.getHeroesAllDeckCards().get("Warlock")){  //we have a loop in all cards in mage's deck
-            if (card.getHeroClassName().equals("Warlock")){
+        deckHeroCarts=new ArrayList<>();
+        for(Card card : CardManagement.getHeroesAllDeckCards().get("Mage")){  //we have a loop in all cards in mage's deck
+            if (card.getHeroClassName().equals("Mage")){
                 deckHeroCarts.add(card);
             }
         }
     }
     @Override
     public void loadDeckNeutralCards() {
-        deckNeutralCards = new ArrayList<>();
-        for(Card card : CardManagement.getHeroesAllDeckCards().get("Warlock")){ //we have a loop in all cards in mage's deck
+        deckNeutralCards=new ArrayList<>();
+        for(Card card : CardManagement.getHeroesAllDeckCards().get("Mage")){ //we have a loop in all cards in mage's deck
             if (card.getHeroClassName().equals("Neutral")){
                 deckNeutralCards.add(card);
             }
@@ -56,18 +57,18 @@ public class Warlock extends Hero{
 
     @Override
     public ArrayList<Card> getDeckHeroCarts() {
-        return Warlock.deckHeroCarts;
-    }
+            return deckHeroCarts;
+     }
     @Override
     public ArrayList<Card> getDeckNeutralCards() {
-        return Warlock.deckNeutralCards;
+        return deckNeutralCards;
     }
     @Override
     public ArrayList<Card> getAllNeutralCards(){
-        return Warlock.allNeutralCards;
+        return allNeutralCards;
     }
     public ArrayList<Card> getAllHeroCards(){
-        return Warlock.allHeroCards;
+        return allHeroCards;
     }
 
 
@@ -119,8 +120,11 @@ public class Warlock extends Hero{
                     }else {
                         if (card.getHeroClassName().equals("Neutral") ){
                             deckNeutralCards.add(card);
+                            CardManagement.updateHeroesAllDeckCards("Neutral" , deckNeutralCards);
                         }else {
                             deckHeroCarts.add(card);
+                            CardManagement.updateHeroesAllDeckCards("Mage" , deckHeroCarts);
+
                         }
                     }
                 }
@@ -147,5 +151,5 @@ public class Warlock extends Hero{
                 " hasn't this card in deck"); }
 
     }
-}
 
+}

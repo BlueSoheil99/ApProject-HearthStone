@@ -1,4 +1,4 @@
-package project01.CartsAndHeros;
+package edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.cards;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -98,8 +98,8 @@ public  class Card {
 
 
 
-//class CartMaker{
-//    public static void main(String[] args) {
+class CartMaker{
+    public static void main(String[] args) {
 //        Card FriendlySmith= new Weapon("Friendly Smith" , 1 , Card.Rarity.Common , Card.HeroClass.Rogue, "N/A",3 );
 //        Card mole= new Weapon("Mole" , 5 , Card.Rarity.Legendary , Card.HeroClass.Rogue, "N/A",4 );
 //        Card Polymorph= new Spell("Polymorph" , 4 , Card.Rarity.Rare , Card.HeroClass.Mage, "N/A" ,3);
@@ -108,7 +108,7 @@ public  class Card {
 //        Card concreteShield= new Spell("Concrete Shield" , 3 , Card.Rarity.Epic , Card.HeroClass.Warlock, "N/A",3 );
 //
 //        Card ShadowMadness = new Weapon("Shadow Madness" , 1 , Card.Rarity.Common , Card.HeroClass.Neutral, "N/A",2 );
-//        Card Supercollider  = new Weapon("SuperCollider" , 5 , Card.Rarity.Epic , Card.HeroClass.Neutral, "N/A",2 );
+        Card SuperCollider  = new Weapon("Super Collider" , 5 , Card.Rarity.Epic , Card.HeroClass.Neutral, "N/A",2 );
 //        Card Gorehowl  = new Weapon("Gorehowl" , 7 , Card.Rarity.Epic , Card.HeroClass.Neutral, "N/A",4 );
 //
 //        Card zilliax = new Minion("zilliax" , 5 , Card.Rarity.Legendary , Card.HeroClass.Neutral, "N/A",3 , 2,2);
@@ -125,9 +125,5 @@ public  class Card {
 //        Card Innervate = new Spell("Innervate" , 0 , Card.Rarity.Rare , Card.HeroClass.Neutral, "N/A"  , 2);
 //
 //
-//
-//
-//
-//    }
-//
-//}
+    }
+}

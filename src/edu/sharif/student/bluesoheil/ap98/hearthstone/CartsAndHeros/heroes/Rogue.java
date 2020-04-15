@@ -1,6 +1,7 @@
-package project01.CartsAndHeros;
+package edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.heroes;
 
-import project01.Players.CardManagement;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.cards.Card;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.Players.CardManagement;
 
 import java.util.ArrayList;
 
@@ -57,18 +58,18 @@ public class Rogue extends Hero {
 
     @Override
     public ArrayList<Card> getDeckHeroCarts() {
-        return Rogue.deckHeroCarts;
+        return deckHeroCarts;
     }
     @Override
     public ArrayList<Card> getDeckNeutralCards() {
-        return Rogue.deckNeutralCards;
+        return deckNeutralCards;
     }
     @Override
     public ArrayList<Card> getAllNeutralCards(){
-        return Rogue.allNeutralCards;
+        return allNeutralCards;
     }
     public ArrayList<Card> getAllHeroCards(){
-        return Rogue.allHeroCards;
+        return allHeroCards;
     }
 
 
@@ -120,8 +121,12 @@ public class Rogue extends Hero {
                     }else {
                         if (card.getHeroClassName().equals("Neutral") ){
                             deckNeutralCards.add(card);
+                            CardManagement.updateHeroesAllDeckCards("Neutral" , deckNeutralCards);
+
                         }else {
                             deckHeroCarts.add(card);
+                            CardManagement.updateHeroesAllDeckCards("Rogue" , deckHeroCarts);
+
                         }
                     }
                 }

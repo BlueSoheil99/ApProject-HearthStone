@@ -1,8 +1,8 @@
-package project01.Players;
+package edu.sharif.student.bluesoheil.ap98.hearthstone.Players;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import project01.CartsAndHeros.Card;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.cards.Card;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -29,13 +29,13 @@ public class Player {
 //            "Humility" , "Innervate" , "Omega Medic" , "Waterboy" , "Voodoo doctor" , "Slam" , "Mole","Arcane explosion","Dreadscale",
 //            "Shadow Madness", "zilliax", "Abomination" , "Murloc Tidehunter", "Consecration","Stormhammer"    };
 
-    private static String[] defaultPlayerTotalCards = { "SuperCollider"  , "Friendly Smith" , "Polymorph" ,
+    private static String[] defaultPlayerTotalCards = { "Super Collider"  , "Friendly Smith" , "Polymorph" ,
         "Humility" , "Innervate" , "Omega Medic" , "Waterboy" , "Voodoo doctor" , "Slam" ,"Dreadscale"
         , "Abomination" , "Murloc Tidehunter"  };
     private static HashMap<String , ArrayList<String>>  defaultDeckCards = new HashMap<String , ArrayList<String>>() ;
     {
         ArrayList<String> list = new ArrayList<>();
-        list.addAll(Arrays.asList( "SuperCollider","Murloc Tidehunter","Abomination","Humility", "Innervate", "Omega Medic", "Waterboy", "Voodoo doctor", "Slam"));
+        list.addAll(Arrays.asList( "Murloc Tidehunter","Super Collider","Abomination","Humility", "Innervate", "Omega Medic", "Waterboy", "Voodoo doctor", "Slam"));
         defaultDeckCards.put("Neutral", list);
         list = new ArrayList<>();
         list.addAll(Arrays.asList("Polymorph"));
@@ -104,7 +104,8 @@ public class Player {
     public void setHeroesAllDeckCards(HashMap<String , ArrayList<Card>> heroesAllDeckCards) {
         for (String hero : heroesAllDeckCards.keySet()) {
             ArrayList<String> deck = new ArrayList<>();
-            for (Card card: heroesAllDeckCards.get(hero)) {
+            ArrayList<Card> heroesDeck = heroesAllDeckCards.get(hero);
+            for (Card card: heroesDeck) {
                 deck.add(card.getName());
             }
             this.heroesAllDeckCards.put(hero , deck);

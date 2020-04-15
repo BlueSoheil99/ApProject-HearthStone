@@ -1,8 +1,12 @@
-package project01.Players;
+package edu.sharif.student.bluesoheil.ap98.hearthstone.Players;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
-import project01.CartsAndHeros.*;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.cards.Card;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.heroes.Hero;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.heroes.Mage;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.heroes.Rogue;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.heroes.Warlock;
 
 import java.io.File;
 import java.io.FileReader;
@@ -28,6 +32,9 @@ public abstract class CardManagement {
     }
     public static HashMap<String, ArrayList<Card>> getHeroesAllDeckCards() {
         return heroesAllDeckCards;
+    }
+    public static void updateHeroesAllDeckCards(String hero , ArrayList<Card> deckCards){
+        heroesAllDeckCards.put(hero , deckCards);
     }
     public static HashMap<String, Card> getGameTotalCards(){
         return gameTotalCards;

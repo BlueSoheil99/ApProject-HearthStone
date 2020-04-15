@@ -1,10 +1,10 @@
-package project01;
+package edu.sharif.student.bluesoheil.ap98.hearthstone;
 
-import project01.CartsAndHeros.Card;
-import project01.Log.Logger;
-import project01.Players.CardManagement;
-import project01.Players.Player;
-import project01.Players.PlayerManagement;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.cards.Card;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.Players.Player;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.Players.PlayerManagement;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.Log.Logger;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.Players.CardManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -322,7 +322,7 @@ public class CLI_Runner {
                     System.out.println("\nyour hero has these " + allCardsHeroHas + " cards: ");
 
                     for (Card card : CardManagement.getCurrentHero().getAllCards() ) {
-                        System.out.println(card.getName() + "   class: " + card.getHeroClassName());
+                        System.out.println(card.getName() + "\t\tclass: " + card.getHeroClassName());
                     }
                     continueByEnter();
                     break;
@@ -335,7 +335,7 @@ public class CLI_Runner {
                     System.out.println("\nyour hero has these " + deckCardsHeroHas + " cards in deck: ");
 
                     for (Card card : CardManagement.getCurrentHero().getDeckCards()) {
-                        System.out.println(card.getName() + "   class: " + card.getHeroClassName());
+                        System.out.println(card.getName() + "\t\tclass: " + card.getHeroClassName());
                     }
                     continueByEnter();
                     break;
@@ -425,10 +425,10 @@ public class CLI_Runner {
                     continueByEnter();
                     break;
 
-                case "LS_S":
+                case "LS-S":
                     System.out.println("\nAll cards you have are "+CardManagement.getPlayerTotalCards().size()+" cards below: ");
                     for (Card card : CardManagement.getPlayerTotalCards() ){
-                        System.out.println("\tName: "+card.getName()+"\tClass: "+card.getHeroClassName()+"\tRarity: "+card.getRarity()+"\tcost: "+card.getCost());
+                        System.out.println("\tName: "+card.getName()+"\t\t\tClass: "+card.getHeroClassName()+"\t\tRarity: "+card.getRarity()+"\tcost: "+card.getCost());
                     }
                     Logger.log("STORE" , "cards displayed: salable cards");
                     continueByEnter();

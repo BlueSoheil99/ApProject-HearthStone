@@ -1,4 +1,6 @@
-package project01.CartsAndHeros;
+package edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.heroes;
+
+import edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.cards.Card;
 
 import java.util.ArrayList;
 

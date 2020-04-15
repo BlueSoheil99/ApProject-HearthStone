@@ -1,4 +1,4 @@
-package project01.CartsAndHeros;
+package edu.sharif.student.bluesoheil.ap98.hearthstone.CartsAndHeros.cards;
 
 public class Weapon extends Card {
 

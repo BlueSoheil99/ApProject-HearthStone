@@ -1,6 +1,6 @@
-package project01.Log;
+package edu.sharif.student.bluesoheil.ap98.hearthstone.Log;
 
-import project01.Players.Player;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.Players.Player;
 
 import java.io.FileWriter;
 import java.io.IOException;

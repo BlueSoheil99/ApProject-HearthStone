@@ -1,9 +1,9 @@
-package project01.Players;
+package edu.sharif.student.bluesoheil.ap98.hearthstone.Players;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import  project01.Log.Logger;
+import edu.sharif.student.bluesoheil.ap98.hearthstone.Log.Logger;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
